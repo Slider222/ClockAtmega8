@@ -6,7 +6,7 @@ int main(void) {
 
     
     while (1) {
-    sendNumber(1234, 2);    
+    sendNumber(1234, 3);    
         
     }
 }
