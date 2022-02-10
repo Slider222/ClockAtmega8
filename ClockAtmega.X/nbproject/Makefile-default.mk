@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=main.c botton.c displ.c
+SOURCEFILES_QUOTED_IF_SPACED=main.c botton.c displ.c funct.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/botton.o ${OBJECTDIR}/displ.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/botton.o.d ${OBJECTDIR}/displ.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/botton.o ${OBJECTDIR}/displ.o ${OBJECTDIR}/funct.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/botton.o.d ${OBJECTDIR}/displ.o.d ${OBJECTDIR}/funct.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/botton.o ${OBJECTDIR}/displ.o
+OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/botton.o ${OBJECTDIR}/displ.o ${OBJECTDIR}/funct.o
 
 # Source Files
-SOURCEFILES=main.c botton.c displ.c
+SOURCEFILES=main.c botton.c displ.c funct.c
 
 
 
@@ -112,6 +112,12 @@ ${OBJECTDIR}/displ.o: displ.c  .generated_files/flags/default/4a2e07d947623bd077
 	@${RM} ${OBJECTDIR}/displ.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/displ.o.d" -MT "${OBJECTDIR}/displ.o.d" -MT ${OBJECTDIR}/displ.o -o ${OBJECTDIR}/displ.o displ.c 
 	
+${OBJECTDIR}/funct.o: funct.c  .generated_files/flags/default/c3d397d1f1cab12b9dbf7a806107ea03d554aafa .generated_files/flags/default/2f9e58fd8ce1a2611b0e0fd33168db129b9285f3
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/funct.o.d 
+	@${RM} ${OBJECTDIR}/funct.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/funct.o.d" -MT "${OBJECTDIR}/funct.o.d" -MT ${OBJECTDIR}/funct.o -o ${OBJECTDIR}/funct.o funct.c 
+	
 else
 ${OBJECTDIR}/main.o: main.c  .generated_files/flags/default/6c4c0c26f36120a95cb6f8630d71cc4c2c1ef450 .generated_files/flags/default/2f9e58fd8ce1a2611b0e0fd33168db129b9285f3
 	@${MKDIR} "${OBJECTDIR}" 
@@ -130,6 +136,12 @@ ${OBJECTDIR}/displ.o: displ.c  .generated_files/flags/default/92210f899f93a0a4bd
 	@${RM} ${OBJECTDIR}/displ.o.d 
 	@${RM} ${OBJECTDIR}/displ.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/displ.o.d" -MT "${OBJECTDIR}/displ.o.d" -MT ${OBJECTDIR}/displ.o -o ${OBJECTDIR}/displ.o displ.c 
+	
+${OBJECTDIR}/funct.o: funct.c  .generated_files/flags/default/317e78230a73f13545251245bafbb8bc6725f9e6 .generated_files/flags/default/2f9e58fd8ce1a2611b0e0fd33168db129b9285f3
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/funct.o.d 
+	@${RM} ${OBJECTDIR}/funct.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/funct.o.d" -MT "${OBJECTDIR}/funct.o.d" -MT ${OBJECTDIR}/funct.o -o ${OBJECTDIR}/funct.o funct.c 
 	
 endif
 

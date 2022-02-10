@@ -13,7 +13,9 @@ build/default/production/displ.o.d build/default/production/displ.o: \
  c:\program\ files\microchip\xc8\v2.32\avr\avr\include\avr\lock.h \
  button.h disp.h \
  c:\program\ files\microchip\xc8\v2.32\avr\avr\include\stdlib.h \
- c:\program\ files\microchip\xc8\v2.32\avr\lib\gcc\avr\5.4.0\include\stddef.h
+ c:\program\ files\microchip\xc8\v2.32\avr\lib\gcc\avr\5.4.0\include\stddef.h \
+ c:\program\ files\microchip\xc8\v2.32\avr\avr\include\util\atomic.h \
+ c:\program\ files\microchip\xc8\v2.32\avr\avr\include\avr\interrupt.h
 
 funct.h:
 
@@ -46,3 +48,7 @@ disp.h:
 c:\program\ files\microchip\xc8\v2.32\avr\avr\include\stdlib.h:
 
 c:\program\ files\microchip\xc8\v2.32\avr\lib\gcc\avr\5.4.0\include\stddef.h:
+
+c:\program\ files\microchip\xc8\v2.32\avr\avr\include\util\atomic.h:
+
+c:\program\ files\microchip\xc8\v2.32\avr\avr\include\avr\interrupt.h:
