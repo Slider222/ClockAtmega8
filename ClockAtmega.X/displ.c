@@ -63,7 +63,7 @@ void sendClock(uint8_t hour, uint8_t min, uint8_t sec){
 		 SPI_SendByte( rezult1);
 		 PORTB &= ~(1 << dataEnable1);
 		 SPI_SendByte( rezult2);
-         
+         ;
 	 }
 
 
