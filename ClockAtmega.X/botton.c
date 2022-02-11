@@ -66,7 +66,7 @@ uint8_t longTupButton(){
        count = 0;
    } 
    if (count >= LONGTUP) {
-       
+       ;
    }
     
 }

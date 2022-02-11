@@ -68,4 +68,6 @@ ISR(TIMER0_OVF_vect)
 {
 	TCNT0 = 125;
 	ticks++;	
+    ;
+    ;
 }
