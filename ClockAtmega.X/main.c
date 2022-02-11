@@ -4,10 +4,7 @@
 volatile uint64_t ticks = 0;
 volatile uint32_t curentTime = 0;
 
-#define ONE              1
-#define TWO              2
-#define THREE            3
-#define FOUR             4
+
 
 int main(void) {
     port_init();
@@ -16,22 +13,23 @@ int main(void) {
     sei();
     uint32_t prevtime1 = 0;
     uint8_t key = 0, statusReg = 0, keyTrig = 0;
-    
+    unsigned char buttonName = 0; 
     
     
     while (1) {
+    buttonIn();    
     curentTime = ticks_ms();
-    key = getKey();
-    keyTrig = trig_button();
+   
+    
 
-    if (keyTrig == ONE){
+    if (buttonName == ONE){
        hours++; 
     }
-    if (keyTrig == TWO){
+    if (buttonName == TWO){
        mins++; 
     }
     
-    if (key == THREE){
+    if (buttonName == THREE){
        mins = mins + 1; 
     }
 
@@ -59,7 +57,7 @@ int main(void) {
         
         
      
-        
+     buttonName = BUT_GetKey();   
     }
 }
 
@@ -67,7 +65,5 @@ int main(void) {
 ISR(TIMER0_OVF_vect)
 {
 	TCNT0 = 125;
-	ticks++;	
-    ;
-    ;
+	ticks++;    
 }
