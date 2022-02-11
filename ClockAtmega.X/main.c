@@ -9,35 +9,43 @@ volatile uint32_t curentTime = 0;
 int main(void) {
     port_init();
     timerInit();
-    uint8_t hours = 12, mins = 24, secs = 0;
+    uint8_t hours = 12, mins = 00, secs = 0;
     sei();
-    uint32_t prevtime1 = 0;
-    uint8_t key = 0, statusReg = 0, keyTrig = 0;
-    unsigned char buttonName = 0; 
+    uint32_t prevtime1 = 0, prevtime2 = 0, prevtime3 = 0, prevtime5 = 0;
+    uint8_t buttonTrigName = 0, buttonLongName = 0;
     
-    
-    while (1) {
-    buttonIn();    
+    while (1) {       
     curentTime = ticks_ms();
-   
+    buttonTrigName = trig_button(); 
+    buttonLongName = longTupButton();
+
+    if (buttonLongName == ONE){
+       if (ticks_ms() - prevtime2 >= LONGINC){
+          hours++;
+          prevtime2 = ticks_ms();
+        }                
+       
+    }
+    if (buttonTrigName == ONE){
+       hours++;
+    }
+
+    if (buttonLongName == TWO){
+       if (ticks_ms() - prevtime5 >= LONGINC){
+          mins++;
+          prevtime5 = ticks_ms();
+        }                
+       
+    }
+    if (buttonTrigName == TWO){
+       mins++;
+    }    
     
 
-    if (buttonName == ONE){
-       hours++; 
-    }
-    if (buttonName == TWO){
-       mins++; 
-    }
     
-    if (buttonName == THREE){
-       mins = mins + 1; 
-    }
-
-    
-    if (curentTime - prevtime1 >= 1000){
-        secs++;
-        sendClock(hours, mins, secs);
-        prevtime1 = curentTime;
+    if (ticks_ms() - prevtime1 >= 1000){
+        secs++;        
+        prevtime1 = ticks_ms();
     }        
         
     if (secs == 60){
@@ -54,16 +62,19 @@ int main(void) {
       
         
     
-        
+      if (ticks_ms() - prevtime3 >= 30){
+          sendClock(hours, mins, secs);
+          prevtime3 = ticks_ms();
+    }                  
         
      
-     buttonName = BUT_GetKey();   
+     
     }
 }
 
 
 ISR(TIMER0_OVF_vect)
 {
-	TCNT0 = 125;
+	TCNT0 = 5;
 	ticks++;    
 }
