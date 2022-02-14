@@ -3,8 +3,10 @@
 #define	ANALOG_H
 
 
-void analogInit();
+#define TEMPCONST 97
 
+void analogInit();
+void startConversion();
 
 #endif	/* XC_HEADER_TEMPLATE_H */
 

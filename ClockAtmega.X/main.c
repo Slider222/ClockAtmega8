@@ -3,13 +3,14 @@
 
 volatile uint64_t ticks = 0;
 volatile uint32_t curentTime = 0;
-
+uint32_t analogTemp = 0;
 
 
 int main(void) {
     port_init();
     timerInit();
     analogInit();
+    startConversion();
     uint8_t hours = 12, mins = 00, secs = 0;
     sei();
     uint32_t prevtime1 = 0, prevtime2 = 0, prevtime3 = 0, prevtime5 = 0;
@@ -78,4 +79,8 @@ ISR(TIMER0_OVF_vect)
 {
 	TCNT0 = 5;
 	ticks++;    
+}
+
+ISR(ADC_vect){
+    analogTemp = ADC * TEMPCONST;
 }
