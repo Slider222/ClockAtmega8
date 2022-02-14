@@ -1,5 +1,6 @@
 #include "funct.h"
-
+                                  //0    1      2     3     4     5     6     7     8     9    _    _min    _C
+	     const uint8_t array[] = {0x3f, 0x06, 0x5b, 0x4f, 0x66, 0x6d, 0x7d, 0x07, 0x7f, 0x6f, 0x00, 0x40, 0x39};	
 
 
 void port_init()//weightController
@@ -46,8 +47,7 @@ void sendClock(uint8_t hour, uint8_t min, uint8_t sec){
 		 static uint8_t slovo1 = 0, slovo2 = 0, slovo3 = 0, slovo4 = 0, slovo5 = 0, slovo6 = 0;
 		 uint32_t rezult1 = 0, rezult2 = 0;
 		 
-	                              //0    1      2     3     4     5     6     7     8     9    _
-	     const uint8_t array[] = {0x3f, 0x06, 0x5b, 0x4f, 0x66, 0x6d, 0x7d, 0x07, 0x7f, 0x6f, 0x00, 0x40};	                          
+	                                                        
 		 slovo1 = array[DIVIDE10(hour)];
          slovo2 = (array[MOD10(hour)]) ^0x80;
     
@@ -68,7 +68,25 @@ void sendClock(uint8_t hour, uint8_t min, uint8_t sec){
 
 
 
-void sendTemp(uint16_t data){
+void sendTemp(uint16_t temp){
+    uint16_t data = temp/100;
+    uint8_t slovo1 = 0, slovo2 = 0, slovo3 = 0;
+    uint32_t rezult1 = 0, rezult2 = 0;
+    slovo1 = array[data/100];
+    slovo2 = (array[(data/10)%10]) ^0x80;
+    slovo3 = array[(data%10)];
+    
+    
+    
+    rezult1 = (((rezult1 | 0x00)<<16)&0xff0000)|(((rezult1 | array[12])<<8)&0xff00)|((rezult1 | 0x00)&0xff);        //??????
+    rezult2 = (((rezult2 |slovo3)<<16)&0xff0000)|(((rezult2 | slovo2)<<8)&0xff00)|((rezult2 | slovo1)&0xff);  //?????
+    
+    PORTB &= ~(1 << dataEnable2);
+    SPI_SendByte( rezult1);
+    PORTB &= ~(1 << dataEnable1);
+    SPI_SendByte( rezult2);
+         
+    
     
 }
 
