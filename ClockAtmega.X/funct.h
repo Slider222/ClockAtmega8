@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <util/atomic.h>
 #include <avr/interrupt.h>
+#include "analog.h"
 
 
 

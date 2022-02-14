@@ -9,6 +9,7 @@ volatile uint32_t curentTime = 0;
 int main(void) {
     port_init();
     timerInit();
+    analogInit();
     uint8_t hours = 12, mins = 00, secs = 0;
     sei();
     uint32_t prevtime1 = 0, prevtime2 = 0, prevtime3 = 0, prevtime5 = 0;
