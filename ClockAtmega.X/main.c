@@ -90,8 +90,8 @@ int main(void) {
     }
     
     valState = analogTemp;
-    if (ticks_ms() - prevtime7 >= 100){
-        averageVal = (averageVal * 20 + valState)/21;      
+    if (ticks_ms() - prevtime7 >= 1000){
+        averageVal = (averageVal * 10 + valState)/11;      
         prevtime7 = ticks_ms();
     }
    
