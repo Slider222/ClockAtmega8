@@ -21,9 +21,11 @@ int main(void) {
     startConversion();
     uint8_t hours = 12, mins = 00, secs = 0;
     sei();
-    uint32_t prevtime1 = 0, prevtime2 = 0, prevtime3 = 0, prevtime4 = 0, prevtime6 = 0;
+    uint32_t prevtime1 = 0, prevtime2 = 0, prevtime3 = 0, prevtime4 = 0, prevtime6 = 0, prevtime7 = 0;
     uint8_t buttonTrigName = 0, buttonLongName = 0;
     uint8_t screenTemp = 0;
+    uint32_t averageVal = analogTemp;
+    uint32_t valState = 0;
     while (1) {       
     curentTime = ticks_ms();
     buttonTrigName = trig_button(); 
@@ -32,22 +34,23 @@ int main(void) {
     if (buttonLongName == ONE){
        if (ticks_ms() - prevtime2 >= LONGINC){
           hours++;
-          prevtime2 = ticks_ms();
-        }                
-       
+          prevtime6 = prevtime2 = ticks_ms();
+        } 
     }
     if (buttonTrigName == ONE){
+       prevtime6 = ticks_ms(); 
        hours++;
     }
 
     if (buttonLongName == TWO){
        if (ticks_ms() - prevtime4 >= LONGINC){
           mins++;
-          prevtime4 = ticks_ms();
+          prevtime6 = prevtime4 = ticks_ms();
         }                
        
     }
     if (buttonTrigName == TWO){
+       prevtime6 = ticks_ms();
        mins++;
     }    
     
@@ -76,7 +79,7 @@ int main(void) {
           if (screenTemp == 0){
               sendClock(hours, mins, secs);
           } else {
-              sendTemp(analogTemp);
+              sendTemp(averageVal);
           }         
           prevtime3 = ticks_ms();
     }                  
@@ -85,18 +88,24 @@ int main(void) {
         screenTemp ^= 1;        
         prevtime6 = ticks_ms();
     }
+    
+    valState = analogTemp;
+    if (ticks_ms() - prevtime7 >= 100){
+        averageVal = (averageVal * 20 + valState)/21;      
+        prevtime7 = ticks_ms();
+    }
    
    
     }         //while
 }            //main
 
 
-ISR(TIMER0_OVF_vect)
-{
+ISR(TIMER0_OVF_vect){
 	TCNT0 = 5;
 	ticks++;    
 }
 
 ISR(ADC_vect){
-    analogTemp = ADC * TEMPCONST;
+    
+    analogTemp = (ADC)*TEMPCONST;
 }

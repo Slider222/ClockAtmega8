@@ -78,7 +78,7 @@ void sendTemp(uint16_t temp){
     
     
     
-    rezult1 = (((rezult1 | 0x00)<<16)&0xff0000)|(((rezult1 | array[12])<<8)&0xff00)|((rezult1 | 0x00)&0xff);        //??????
+    rezult1 = (((rezult1 | array[12])<<16)&0xff0000)|(((rezult1 |0x63)<<8)&0xff00)|((rezult1 |0x00 )&0xff);        //??????
     rezult2 = (((rezult2 |slovo3)<<16)&0xff0000)|(((rezult2 | slovo2)<<8)&0xff00)|((rezult2 | slovo1)&0xff);  //?????
     
     PORTB &= ~(1 << dataEnable2);
