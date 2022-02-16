@@ -85,9 +85,13 @@ void sendTemp(uint32_t temp){
     SPI_SendByte( rezult1);
     PORTB &= ~(1 << dataEnable1);
     SPI_SendByte( rezult2);
-         
-    
-    
+}
+
+void offDispley(){
+    PORTB &= ~(1 << dataEnable2);
+    SPI_SendByte(0);
+    PORTB &= ~(1 << dataEnable1);
+    SPI_SendByte(0);
 }
 
 

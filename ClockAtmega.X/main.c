@@ -24,6 +24,7 @@ int main(void) {
     uint32_t prevtime1 = 0, prevtime2 = 0, prevtime3 = 0, prevtime4 = 0, prevtime6 = 0, prevtime7 = 0;
     uint8_t buttonTrigName = 0, buttonLongName = 0;
     uint8_t screenTemp = 0;
+    uint8_t displeyOff = 0;
     uint32_t averageVal = analogTemp;
     uint32_t valState = 0;
     while (1) {       
@@ -52,7 +53,11 @@ int main(void) {
     if (buttonTrigName == TWO){
        prevtime6 = ticks_ms();
        mins++;
-    }    
+    }
+
+    if (buttonTrigName == THREE){
+       displeyOff ^= 1;       
+    }        
     
 
     
@@ -76,12 +81,16 @@ int main(void) {
         
     
       if (ticks_ms() - prevtime3 >= 30){
-          //sendTemp(analogTemp);
-          if (screenTemp == 0){
+        if (displeyOff == 0){
+            if (screenTemp == 0){
               sendClock(hours, mins, secs);
           } else {
               sendTemp(averageVal);
           }         
+        } else {
+            offDispley();
+        }          
+          
           prevtime3 = ticks_ms();
     }                  
     
