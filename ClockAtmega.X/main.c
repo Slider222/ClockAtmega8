@@ -76,6 +76,7 @@ int main(void) {
         
     
       if (ticks_ms() - prevtime3 >= 30){
+          //sendTemp(analogTemp);
           if (screenTemp == 0){
               sendClock(hours, mins, secs);
           } else {
@@ -107,5 +108,5 @@ ISR(TIMER0_OVF_vect){
 
 ISR(ADC_vect){
     
-    analogTemp = (ADC)*TEMPCONST;
+    analogTemp = ADC * 247;
 }

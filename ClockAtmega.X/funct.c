@@ -12,8 +12,7 @@ void timerInit(){
 
 uint64_t ticks_ms(){
     uint64_t ticksReturn = 0;
-	ATOMIC_BLOCK(ATOMIC_FORCEON)
-	{  	
+	ATOMIC_BLOCK(ATOMIC_FORCEON){  	
         ticksReturn = ticks;		
 	}
     return ticksReturn;	

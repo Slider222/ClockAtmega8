@@ -27,7 +27,7 @@
 void port_init();
 void SPI_SendByte(uint32_t byte);
 void sendClock(uint8_t hour, uint8_t min, uint8_t sec);
-void sendTemp(uint16_t temp);
+void sendTemp(uint32_t temp);
 
 #endif	/* XC_HEADER_TEMPLATE_H */
 

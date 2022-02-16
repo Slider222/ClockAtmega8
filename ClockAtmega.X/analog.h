@@ -3,7 +3,7 @@
 #define	ANALOG_H
 
 
-#define TEMPCONST 400
+#define TEMPCONST 1
 
 void analogInit();
 void startConversion();

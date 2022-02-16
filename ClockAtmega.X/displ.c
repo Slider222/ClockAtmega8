@@ -68,7 +68,7 @@ void sendClock(uint8_t hour, uint8_t min, uint8_t sec){
 
 
 
-void sendTemp(uint16_t temp){
+void sendTemp(uint32_t temp){
     uint16_t data = temp/100;
     uint8_t slovo1 = 0, slovo2 = 0, slovo3 = 0;
     uint32_t rezult1 = 0, rezult2 = 0;
@@ -78,8 +78,8 @@ void sendTemp(uint16_t temp){
     
     
     
-    rezult1 = (((rezult1 | array[12])<<16)&0xff0000)|(((rezult1 |0x63)<<8)&0xff00)|((rezult1 |0x00 )&0xff);        //??????
-    rezult2 = (((rezult2 |slovo3)<<16)&0xff0000)|(((rezult2 | slovo2)<<8)&0xff00)|((rezult2 | slovo1)&0xff);  //?????
+    rezult1 = (((rezult1 | array[12])<<16)&0xff0000)|(((rezult1 |0x63)<<8)&0xff00)|((rezult1 |0x00 )&0xff);        
+    rezult2 = (((rezult2 |slovo3)<<16)&0xff0000)|(((rezult2 | slovo2)<<8)&0xff00)|((rezult2 | slovo1)&0xff);  
     
     PORTB &= ~(1 << dataEnable2);
     SPI_SendByte( rezult1);
