@@ -19,7 +19,7 @@ int main(void) {
     timerInit();
     analogInit();
     startConversion();
-    uint8_t hours = 12, mins = 00, secs = 0;
+    uint8_t hours = 12, mins = 00, secs = 00;
     sei();
     uint32_t prevtime1 = 0, prevtime2 = 0, prevtime3 = 0, prevtime4 = 0, prevtime6 = 0, prevtime7 = 0;
     uint8_t buttonTrigName = 0, buttonLongName = 0;
@@ -27,6 +27,7 @@ int main(void) {
     uint8_t displeyOff = 0;
     uint32_t averageVal = analogTemp;
     uint32_t valState = 0;
+    
     while (1) {       
     curentTime = ticks_ms();
     buttonTrigName = trig_button(); 
