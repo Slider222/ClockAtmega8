@@ -111,7 +111,7 @@ int main(void) {
 
 
 ISR(TIMER0_OVF_vect){
-	TCNT0 = 5;
+	TCNT0 = 6;
 	ticks++;    
 }
 

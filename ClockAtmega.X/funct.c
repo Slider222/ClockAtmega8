@@ -4,7 +4,7 @@ extern volatile uint64_t ticks;
 
 
 void timerInit(){
-	TCNT0 = 5;                 
+	TCNT0 = 6;                 
 	TIMSK |= (1 << TOIE0);    
 	TCCR0 |= (1 << CS11)|(1 << CS10);	
 
