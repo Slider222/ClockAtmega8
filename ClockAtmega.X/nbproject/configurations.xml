@@ -8,6 +8,7 @@
       <itemPath>funct.h</itemPath>
       <itemPath>disp.h</itemPath>
       <itemPath>analog.h</itemPath>
+      <itemPath>uart.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -21,6 +22,7 @@
       <itemPath>displ.c</itemPath>
       <itemPath>funct.c</itemPath>
       <itemPath>analog.c</itemPath>
+      <itemPath>uart.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

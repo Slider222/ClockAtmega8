@@ -9,7 +9,7 @@
 #include <util/atomic.h>
 #include <avr/interrupt.h>
 #include "analog.h"
-
+#include "uart.h"
 
 
 

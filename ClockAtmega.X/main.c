@@ -19,6 +19,7 @@ int main(void) {
     timerInit();
     analogInit();
     startConversion();
+    uartInit(MYUBRR);
     uint8_t hours = 12, mins = 00, secs = 00;
     sei();
     uint32_t prevtime1 = 0, prevtime2 = 0, prevtime3 = 0, prevtime4 = 0, prevtime6 = 0, prevtime7 = 0;
@@ -96,7 +97,8 @@ int main(void) {
     }                  
     
     if (ticks_ms() - prevtime6 >= 5000){
-        screenTemp ^= 1;        
+        screenTemp ^= 1;
+        uartTransmit32(127500);        
         prevtime6 = ticks_ms();
     }
     
@@ -112,7 +114,7 @@ int main(void) {
 
 
 ISR(TIMER0_OVF_vect){
-	TCNT0 = 6;
+	TCNT0 = 7;
 	ticks++;    
 }
 
