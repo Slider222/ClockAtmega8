@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=main.c botton.c displ.c funct.c analog.c
+SOURCEFILES_QUOTED_IF_SPACED=main.c botton.c displ.c funct.c analog.c uart.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/botton.o ${OBJECTDIR}/displ.o ${OBJECTDIR}/funct.o ${OBJECTDIR}/analog.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/botton.o.d ${OBJECTDIR}/displ.o.d ${OBJECTDIR}/funct.o.d ${OBJECTDIR}/analog.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/botton.o ${OBJECTDIR}/displ.o ${OBJECTDIR}/funct.o ${OBJECTDIR}/analog.o ${OBJECTDIR}/uart.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/botton.o.d ${OBJECTDIR}/displ.o.d ${OBJECTDIR}/funct.o.d ${OBJECTDIR}/analog.o.d ${OBJECTDIR}/uart.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/botton.o ${OBJECTDIR}/displ.o ${OBJECTDIR}/funct.o ${OBJECTDIR}/analog.o
+OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/botton.o ${OBJECTDIR}/displ.o ${OBJECTDIR}/funct.o ${OBJECTDIR}/analog.o ${OBJECTDIR}/uart.o
 
 # Source Files
-SOURCEFILES=main.c botton.c displ.c funct.c analog.c
+SOURCEFILES=main.c botton.c displ.c funct.c analog.c uart.c
 
 
 
@@ -94,66 +94,123 @@ MP_PROCESSOR_OPTION=ATmega8
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
+<<<<<<< HEAD
 ${OBJECTDIR}/main.o: main.c  .generated_files/flags/default/c497b4c17ebb25fe35db858c1dda1b274362f80 .generated_files/flags/default/ea5822228fc57a71500df969f49d3d0bb3234ff4
+=======
+${OBJECTDIR}/main.o: main.c  .generated_files/flags/default/caf1dc15420087cb67e808a70aa9f44a17856153 .generated_files/flags/default/a19fd79c6c02c84713210d50cb71bf68d14725e
+>>>>>>> b13c1df5d9aefd3b52c63a8ca37ea8ca1c617667
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/main.o.d 
 	@${RM} ${OBJECTDIR}/main.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__    -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/main.o.d" -MT "${OBJECTDIR}/main.o.d" -MT ${OBJECTDIR}/main.o -o ${OBJECTDIR}/main.o main.c 
 	
+<<<<<<< HEAD
 ${OBJECTDIR}/botton.o: botton.c  .generated_files/flags/default/af77ec3aa6bd6fac95092a9034b56eafb0197ebd .generated_files/flags/default/ea5822228fc57a71500df969f49d3d0bb3234ff4
+=======
+${OBJECTDIR}/botton.o: botton.c  .generated_files/flags/default/97889a7b6347578cd5534a9ac11b3d455a7ad7d2 .generated_files/flags/default/a19fd79c6c02c84713210d50cb71bf68d14725e
+>>>>>>> b13c1df5d9aefd3b52c63a8ca37ea8ca1c617667
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/botton.o.d 
 	@${RM} ${OBJECTDIR}/botton.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__    -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/botton.o.d" -MT "${OBJECTDIR}/botton.o.d" -MT ${OBJECTDIR}/botton.o -o ${OBJECTDIR}/botton.o botton.c 
 	
+<<<<<<< HEAD
 ${OBJECTDIR}/displ.o: displ.c  .generated_files/flags/default/a6ac69640b2a3346afb25399a791df4cbbaf6b9d .generated_files/flags/default/ea5822228fc57a71500df969f49d3d0bb3234ff4
+=======
+${OBJECTDIR}/displ.o: displ.c  .generated_files/flags/default/e42beb38eace70a7988061bdd6d7bba209681580 .generated_files/flags/default/a19fd79c6c02c84713210d50cb71bf68d14725e
+>>>>>>> b13c1df5d9aefd3b52c63a8ca37ea8ca1c617667
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/displ.o.d 
 	@${RM} ${OBJECTDIR}/displ.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__    -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/displ.o.d" -MT "${OBJECTDIR}/displ.o.d" -MT ${OBJECTDIR}/displ.o -o ${OBJECTDIR}/displ.o displ.c 
 	
+<<<<<<< HEAD
 ${OBJECTDIR}/funct.o: funct.c  .generated_files/flags/default/75cbd5820b25a064532ba113d7096e8dd794c750 .generated_files/flags/default/ea5822228fc57a71500df969f49d3d0bb3234ff4
+=======
+${OBJECTDIR}/funct.o: funct.c  .generated_files/flags/default/931a7ba7a8800d2d18b31cc42c53c33da703bef .generated_files/flags/default/a19fd79c6c02c84713210d50cb71bf68d14725e
+>>>>>>> b13c1df5d9aefd3b52c63a8ca37ea8ca1c617667
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/funct.o.d 
 	@${RM} ${OBJECTDIR}/funct.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__    -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/funct.o.d" -MT "${OBJECTDIR}/funct.o.d" -MT ${OBJECTDIR}/funct.o -o ${OBJECTDIR}/funct.o funct.c 
 	
+<<<<<<< HEAD
 ${OBJECTDIR}/analog.o: analog.c  .generated_files/flags/default/2e018cf2c38c52eedeb5b22d35a15c224ae786 .generated_files/flags/default/ea5822228fc57a71500df969f49d3d0bb3234ff4
+=======
+${OBJECTDIR}/analog.o: analog.c  .generated_files/flags/default/e69c3c5ff10713c50e01860921f0326d504120a8 .generated_files/flags/default/a19fd79c6c02c84713210d50cb71bf68d14725e
+>>>>>>> b13c1df5d9aefd3b52c63a8ca37ea8ca1c617667
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/analog.o.d 
 	@${RM} ${OBJECTDIR}/analog.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__    -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/analog.o.d" -MT "${OBJECTDIR}/analog.o.d" -MT ${OBJECTDIR}/analog.o -o ${OBJECTDIR}/analog.o analog.c 
+<<<<<<< HEAD
 	
 else
 ${OBJECTDIR}/main.o: main.c  .generated_files/flags/default/85d8950a71ad598620ed4d12dce761ec2c77454b .generated_files/flags/default/ea5822228fc57a71500df969f49d3d0bb3234ff4
+=======
+	
+${OBJECTDIR}/uart.o: uart.c  .generated_files/flags/default/fab9c5d97c8fa40ef4bab37bf698f4ea5cc4c4bf .generated_files/flags/default/a19fd79c6c02c84713210d50cb71bf68d14725e
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/uart.o.d 
+	@${RM} ${OBJECTDIR}/uart.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__    -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/uart.o.d" -MT "${OBJECTDIR}/uart.o.d" -MT ${OBJECTDIR}/uart.o -o ${OBJECTDIR}/uart.o uart.c 
+	
+else
+${OBJECTDIR}/main.o: main.c  .generated_files/flags/default/f5626fd337ca3c461e06332534a4cd02a7cc6ede .generated_files/flags/default/a19fd79c6c02c84713210d50cb71bf68d14725e
+>>>>>>> b13c1df5d9aefd3b52c63a8ca37ea8ca1c617667
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/main.o.d 
 	@${RM} ${OBJECTDIR}/main.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__    -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/main.o.d" -MT "${OBJECTDIR}/main.o.d" -MT ${OBJECTDIR}/main.o -o ${OBJECTDIR}/main.o main.c 
 	
+<<<<<<< HEAD
 ${OBJECTDIR}/botton.o: botton.c  .generated_files/flags/default/4b38c253073ab52bdb3f1f80f96794acf66f9357 .generated_files/flags/default/ea5822228fc57a71500df969f49d3d0bb3234ff4
+=======
+${OBJECTDIR}/botton.o: botton.c  .generated_files/flags/default/46f8d2de30ff2648786261f0c8f34d7c7404d6a9 .generated_files/flags/default/a19fd79c6c02c84713210d50cb71bf68d14725e
+>>>>>>> b13c1df5d9aefd3b52c63a8ca37ea8ca1c617667
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/botton.o.d 
 	@${RM} ${OBJECTDIR}/botton.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__    -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/botton.o.d" -MT "${OBJECTDIR}/botton.o.d" -MT ${OBJECTDIR}/botton.o -o ${OBJECTDIR}/botton.o botton.c 
 	
+<<<<<<< HEAD
 ${OBJECTDIR}/displ.o: displ.c  .generated_files/flags/default/3b63d3b8b61ae2d0aad27ef8bdb8adae1f973fed .generated_files/flags/default/ea5822228fc57a71500df969f49d3d0bb3234ff4
+=======
+${OBJECTDIR}/displ.o: displ.c  .generated_files/flags/default/68a20344430fe562398883aa916de1d08214ae3a .generated_files/flags/default/a19fd79c6c02c84713210d50cb71bf68d14725e
+>>>>>>> b13c1df5d9aefd3b52c63a8ca37ea8ca1c617667
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/displ.o.d 
 	@${RM} ${OBJECTDIR}/displ.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__    -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/displ.o.d" -MT "${OBJECTDIR}/displ.o.d" -MT ${OBJECTDIR}/displ.o -o ${OBJECTDIR}/displ.o displ.c 
 	
+<<<<<<< HEAD
 ${OBJECTDIR}/funct.o: funct.c  .generated_files/flags/default/1a282f625d212e160d8c281bda77126c52aaa0b4 .generated_files/flags/default/ea5822228fc57a71500df969f49d3d0bb3234ff4
+=======
+${OBJECTDIR}/funct.o: funct.c  .generated_files/flags/default/dd0025a9e2b40cab729f4803225121b4bc40eb54 .generated_files/flags/default/a19fd79c6c02c84713210d50cb71bf68d14725e
+>>>>>>> b13c1df5d9aefd3b52c63a8ca37ea8ca1c617667
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/funct.o.d 
 	@${RM} ${OBJECTDIR}/funct.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__    -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/funct.o.d" -MT "${OBJECTDIR}/funct.o.d" -MT ${OBJECTDIR}/funct.o -o ${OBJECTDIR}/funct.o funct.c 
 	
+<<<<<<< HEAD
 ${OBJECTDIR}/analog.o: analog.c  .generated_files/flags/default/ff740b5483e8d2cba679022348a40cfd1217a8f2 .generated_files/flags/default/ea5822228fc57a71500df969f49d3d0bb3234ff4
+=======
+${OBJECTDIR}/analog.o: analog.c  .generated_files/flags/default/3e4fd87e1542c54815e2f0b1fcc81fafe6296685 .generated_files/flags/default/a19fd79c6c02c84713210d50cb71bf68d14725e
+>>>>>>> b13c1df5d9aefd3b52c63a8ca37ea8ca1c617667
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/analog.o.d 
 	@${RM} ${OBJECTDIR}/analog.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__    -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/analog.o.d" -MT "${OBJECTDIR}/analog.o.d" -MT ${OBJECTDIR}/analog.o -o ${OBJECTDIR}/analog.o analog.c 
+<<<<<<< HEAD
+=======
+	
+${OBJECTDIR}/uart.o: uart.c  .generated_files/flags/default/5450156c45310ffacea9670ec13f86441a914a29 .generated_files/flags/default/a19fd79c6c02c84713210d50cb71bf68d14725e
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/uart.o.d 
+	@${RM} ${OBJECTDIR}/uart.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__    -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/uart.o.d" -MT "${OBJECTDIR}/uart.o.d" -MT ${OBJECTDIR}/uart.o -o ${OBJECTDIR}/uart.o uart.c 
+>>>>>>> b13c1df5d9aefd3b52c63a8ca37ea8ca1c617667
 	
 endif
 
