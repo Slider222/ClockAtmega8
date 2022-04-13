@@ -10,6 +10,8 @@
 #include <avr/interrupt.h>
 #include "analog.h"
 #include "uart.h"
+#include "buzzer.h"
+#include <avr/pgmspace.h>
 
 
 

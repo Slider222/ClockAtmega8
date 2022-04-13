@@ -11,7 +11,7 @@ volatile uint64_t ticks = 0;
 volatile uint32_t curentTime = 0;
 uint32_t analogTemp = 0;
 
-
+uint32_t musicTime = 0;
 
 
 int main(void) {

@@ -12,6 +12,7 @@ void port_init()//weightController
 	
 	DDRB |= (1 << clockInput)|(1 << dataInput)|(1 << dataEnable1)|(1 << dataEnable2);
 	PORTB |= (1 << dataEnable1)|(1 << dataEnable2);
+    
 	
 	//DDRA |= (1 << PINA4)| (1 << PINA5);          //????? ??????
 	//PORTA |=(1 << PINA4);
