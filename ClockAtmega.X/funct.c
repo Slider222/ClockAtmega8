@@ -3,6 +3,22 @@
 extern volatile uint64_t ticks;
 
 
+void port_init()
+{	
+	DDRB |= (1 << PORTB0);    
+    DDRD |= (1 << PORTD5);
+    DDRC |= (1 << PORTC0)| (1 << PORTC1) | (1 << PORTC2);
+	
+	
+	DDRB |= (1 << clockInput)|(1 << dataInput)|(1 << dataEnable1)|(1 << dataEnable2);
+	PORTB |= (1 << dataEnable1)|(1 << dataEnable2);
+    
+    
+    
+	
+	
+}
+
 void timerInit(){
 	TCNT0 = 7;                 
 	TIMSK |= (1 << TOIE0);    

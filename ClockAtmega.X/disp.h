@@ -4,10 +4,7 @@
 
 
 
-#define clockInput       PB1
-#define dataInput        PB2
-#define dataEnable1      PB3
-#define dataEnable2      PB4
+
 
 #define DIGIT6(data)  (data)%10
 #define DIGIT5(data)  (data/10%10)
@@ -24,7 +21,7 @@
 #define div10   10
 
 
-void port_init();
+
 void SPI_SendByte(uint32_t byte);
 void sendClock(uint8_t hour, uint8_t min, uint8_t sec);
 void sendTemp(uint32_t temp);

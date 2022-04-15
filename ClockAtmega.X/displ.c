@@ -3,24 +3,7 @@
 	     const uint8_t array[] = {0x3f, 0x06, 0x5b, 0x4f, 0x66, 0x6d, 0x7d, 0x07, 0x7f, 0x6f, 0x00, 0x40, 0x39};	
 
 
-void port_init()//weightController
-{	
-	DDRB |= (1 << PORTB0);    //?????? ??? ??????
-    DDRD |= (1 << PORTD5);
 
-	
-	
-	DDRB |= (1 << clockInput)|(1 << dataInput)|(1 << dataEnable1)|(1 << dataEnable2);
-	PORTB |= (1 << dataEnable1)|(1 << dataEnable2);
-    
-	
-	//DDRA |= (1 << PINA4)| (1 << PINA5);          //????? ??????
-	//PORTA |=(1 << PINA4);
-	
-	//DDRA |= (1 << PINA6)| (1 << PINA3);          //????? ??????
-    //PORTA |= (1 << PINA6);	
-	
-}
 
 void SPI_SendByte(uint32_t byte){	   	  
 	   PORTB |= (1 << dataInput);

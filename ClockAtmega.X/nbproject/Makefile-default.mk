@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=main.c botton.c displ.c funct.c analog.c buzzer.c
+SOURCEFILES_QUOTED_IF_SPACED=main.c botton.c displ.c funct.c analog.c buzzer.c ds1302.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/botton.o ${OBJECTDIR}/displ.o ${OBJECTDIR}/funct.o ${OBJECTDIR}/analog.o ${OBJECTDIR}/buzzer.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/botton.o.d ${OBJECTDIR}/displ.o.d ${OBJECTDIR}/funct.o.d ${OBJECTDIR}/analog.o.d ${OBJECTDIR}/buzzer.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/botton.o ${OBJECTDIR}/displ.o ${OBJECTDIR}/funct.o ${OBJECTDIR}/analog.o ${OBJECTDIR}/buzzer.o ${OBJECTDIR}/ds1302.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/botton.o.d ${OBJECTDIR}/displ.o.d ${OBJECTDIR}/funct.o.d ${OBJECTDIR}/analog.o.d ${OBJECTDIR}/buzzer.o.d ${OBJECTDIR}/ds1302.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/botton.o ${OBJECTDIR}/displ.o ${OBJECTDIR}/funct.o ${OBJECTDIR}/analog.o ${OBJECTDIR}/buzzer.o
+OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/botton.o ${OBJECTDIR}/displ.o ${OBJECTDIR}/funct.o ${OBJECTDIR}/analog.o ${OBJECTDIR}/buzzer.o ${OBJECTDIR}/ds1302.o
 
 # Source Files
-SOURCEFILES=main.c botton.c displ.c funct.c analog.c buzzer.c
+SOURCEFILES=main.c botton.c displ.c funct.c analog.c buzzer.c ds1302.c
 
 
 
@@ -130,6 +130,12 @@ ${OBJECTDIR}/buzzer.o: buzzer.c  .generated_files/flags/default/b3084823f380da59
 	@${RM} ${OBJECTDIR}/buzzer.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__    -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/buzzer.o.d" -MT "${OBJECTDIR}/buzzer.o.d" -MT ${OBJECTDIR}/buzzer.o -o ${OBJECTDIR}/buzzer.o buzzer.c 
 	
+${OBJECTDIR}/ds1302.o: ds1302.c  .generated_files/flags/default/4ba797e841f56b4b2a06f34b6444b968bc45736a .generated_files/flags/default/ea5822228fc57a71500df969f49d3d0bb3234ff4
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/ds1302.o.d 
+	@${RM} ${OBJECTDIR}/ds1302.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__    -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/ds1302.o.d" -MT "${OBJECTDIR}/ds1302.o.d" -MT ${OBJECTDIR}/ds1302.o -o ${OBJECTDIR}/ds1302.o ds1302.c 
+	
 else
 ${OBJECTDIR}/main.o: main.c  .generated_files/flags/default/85d8950a71ad598620ed4d12dce761ec2c77454b .generated_files/flags/default/ea5822228fc57a71500df969f49d3d0bb3234ff4
 	@${MKDIR} "${OBJECTDIR}" 
@@ -166,6 +172,12 @@ ${OBJECTDIR}/buzzer.o: buzzer.c  .generated_files/flags/default/b93eeb5b61751609
 	@${RM} ${OBJECTDIR}/buzzer.o.d 
 	@${RM} ${OBJECTDIR}/buzzer.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__    -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/buzzer.o.d" -MT "${OBJECTDIR}/buzzer.o.d" -MT ${OBJECTDIR}/buzzer.o -o ${OBJECTDIR}/buzzer.o buzzer.c 
+	
+${OBJECTDIR}/ds1302.o: ds1302.c  .generated_files/flags/default/ae0e492a531d22e1fd9664e89ecf23b40eaf08c3 .generated_files/flags/default/ea5822228fc57a71500df969f49d3d0bb3234ff4
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/ds1302.o.d 
+	@${RM} ${OBJECTDIR}/ds1302.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__    -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/ds1302.o.d" -MT "${OBJECTDIR}/ds1302.o.d" -MT ${OBJECTDIR}/ds1302.o -o ${OBJECTDIR}/ds1302.o ds1302.c 
 	
 endif
 
