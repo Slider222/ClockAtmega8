@@ -65,14 +65,14 @@ void sendTemp(uint32_t temp){
     rezult1 = (((rezult1 | array[12])<<16)&0xff0000)|(((rezult1 |0x63)<<8)&0xff00)|((rezult1 |0x00 )&0xff);        
     rezult2 = (((rezult2 |slovo3)<<16)&0xff0000)|(((rezult2 | slovo2)<<8)&0xff00)|((rezult2 | slovo1)&0xff);  
     
-    PORTC &= ~(1 << dataEnable2);
+    PORTB &= ~(1 << dataEnable2);
     SPI_SendByte( rezult1);
     PORTB &= ~(1 << dataEnable1);
     SPI_SendByte( rezult2);
 }
 
 void offDispley(){
-    PORTC &= ~(1 << dataEnable2);
+    PORTB &= ~(1 << dataEnable2);
     SPI_SendByte(0);
     PORTB &= ~(1 << dataEnable1);
     SPI_SendByte(0);

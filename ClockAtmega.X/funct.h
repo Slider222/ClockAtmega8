@@ -2,12 +2,13 @@
 #ifndef FUNCT_H
 #define	FUNCT_H
 
+#define F_CPU 16000000UL
 
 #define clockInput       PB1
 #define dataInput        PB2
 #define dataEnable1      PB3
 #define dataEnable2      PB4
-#define LEDPIN           PB5
+
 
 #define RTC_CLK          PD2  //D2
 #define RTC_DAT          PD3  //D3
@@ -31,6 +32,7 @@
 #include "buzzer.h"
 #include "ds1302.h"
 #include <avr/pgmspace.h>
+#include <util/delay.h>
 
 
 
@@ -41,6 +43,8 @@
 void port_init();
 void timerInit();
 uint64_t ticks_ms();
+uint8_t hexToBin(uint8_t data);
+uint8_t binToHex(uint8_t data);
 
 #endif	/* FUNCT_H */
 

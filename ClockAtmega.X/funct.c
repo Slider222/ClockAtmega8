@@ -6,11 +6,11 @@ extern volatile uint64_t ticks;
 void port_init()
 {	
 	DDRB |= (1 << PORTB0);    
-    DDRD |= (1 << PORTD5);
-    DDRC |= (1 << PORTC0) | (1 << PORTC1)| (1 << PORTC2);
+    DDRD |= (1 << PORTD5) | (1 << RTC_CLK) | (1 << RTC_DAT) | (1 << RTC_CE);
+    DDRC |= (1 << PORTC0) | (1 << PORTC1);
 	
 	
-	DDRB |= (1 << clockInput)|(1 << dataInput)|(1 << dataEnable1) | (1 << dataEnable2);
+	DDRB |= (1 << clockInput) | (1 << dataInput) | (1 << dataEnable1) | (1 << dataEnable2);
 	PORTB |= (1 << dataEnable1) | (1 << dataEnable2);
     
     
@@ -42,3 +42,12 @@ uint64_t ticks_ms(){
 
 
 
+uint8_t hexToBin(uint8_t data){
+    uint8_t rezult = ((((data & 0xF0) >> 4) * 10) + (data & 0x0f));
+    return rezult;
+}
+
+uint8_t binToHex(uint8_t data){
+   uint8_t rezult = ((data/10) << 4) + data % 10;
+   return rezult;   
+}

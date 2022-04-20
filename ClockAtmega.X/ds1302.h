@@ -5,8 +5,10 @@
 
 void RTC_SendByte(uint8_t byte);
 uint8_t RTC_ReadByte();
-uint8_t RTC_ReadReg(uint8_t adresse);
-
+void RTC_ReadClock();
+void RTC_SetHour(uint8_t hours);
+void RTC_SetMin(uint8_t mins);
+void RTC_Unlock();
 
 
 #endif	/* DS1302_H */
