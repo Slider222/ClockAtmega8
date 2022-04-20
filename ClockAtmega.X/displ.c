@@ -22,7 +22,7 @@ void SPI_SendByte(uint32_t byte){
 		   PORTB &= ~(1 << clockInput);
 	   }
 	   PORTB |= (1 << dataEnable1);
-	   PORTC |= (1 << dataEnable2);	
+	   PORTB |= (1 << dataEnable2);	
 }
 
 
@@ -43,7 +43,7 @@ void sendClock(uint8_t hour, uint8_t min, uint8_t sec){
          
 		 rezult1 = (((rezult1 |slovo6)<<16)&0xff0000)|(((rezult1 |slovo5)<<8)&0xff00)|((rezult1 | slovo4)&0xff);
 		 rezult2 = (((rezult2 |slovo3)<<16)&0xff0000)|(((rezult2 | slovo2)<<8)&0xff00)|((rezult2 | slovo1)&0xff);
-		 PORTC &= ~(1 << dataEnable2);
+		 PORTB &= ~(1 << dataEnable2);
 		 SPI_SendByte( rezult1);
 		 PORTB &= ~(1 << dataEnable1);
 		 SPI_SendByte( rezult2);

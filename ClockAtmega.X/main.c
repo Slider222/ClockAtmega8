@@ -14,7 +14,7 @@ int main(void) {
     timerInit();
     analogInit();
     startConversion();
-    uartInit(MYUBRR);
+    uartInit(MYUBRR);    
     uint8_t hours = 12, mins = 00, secs = 00;
     sei();
     uint32_t prevtime1 = 0, prevtime2 = 0, prevtime3 = 0, prevtime4 = 0, prevtime6 = 0, prevtime7 = 0;
@@ -22,13 +22,12 @@ int main(void) {
     uint8_t screenTemp = 0;
     uint8_t displeyOff = 0;
     uint32_t averageVal = analogTemp;
-    uint32_t valState = 0;
+    uint32_t valState = 0; 
     
     while (1) {       
     curentTime = ticks_ms();
     buttonTrigName = trig_button(); 
-    buttonLongName = longTupButton();
-
+    buttonLongName = longTupButton();    
     if (buttonLongName == ONE){
        if (ticks_ms() - prevtime2 >= LONGINC){
           hours++;
@@ -59,7 +58,7 @@ int main(void) {
 
     
     if (ticks_ms() - prevtime1 >= 1000){
-        secs++;        
+        secs++;
         prevtime1 = ticks_ms();
     }        
         
@@ -75,13 +74,13 @@ int main(void) {
            hours = 0;
        }     
       
-        
+          
     
       if (ticks_ms() - prevtime3 >= 30){
         if (displeyOff == 0){
             if (screenTemp == 0){
-              sendClock(hours, mins, secs);
-          } else {
+              sendClock(hours, mins, secs);              
+          } else {              
               sendTemp(averageVal);
           }         
         } else {
@@ -92,7 +91,7 @@ int main(void) {
     }                  
     
     if (ticks_ms() - prevtime6 >= 5000){
-        screenTemp ^= 1;
+        screenTemp ^= 1;               
         uartTransmit32(127500);        
         prevtime6 = ticks_ms();
     }
@@ -102,7 +101,7 @@ int main(void) {
         averageVal = (averageVal * 10 + valState)/11;      
         prevtime7 = ticks_ms();
     }
-   
+    
    
     }         //while
 }            //main
@@ -110,10 +109,10 @@ int main(void) {
 
 ISR(TIMER0_OVF_vect){
 	TCNT0 = 7;
-	ticks++;    
+	ticks++;
+    
 }
 
-ISR(ADC_vect){
-    
+ISR(ADC_vect){    
     analogTemp = ADC * 247;
 }

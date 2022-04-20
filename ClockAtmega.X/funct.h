@@ -6,7 +6,8 @@
 #define clockInput       PB1
 #define dataInput        PB2
 #define dataEnable1      PB3
-#define dataEnable2      PC1
+#define dataEnable2      PB4
+#define LEDPIN           PB5
 
 #define RTC_CLK          PD2  //D2
 #define RTC_DAT          PD3  //D3
