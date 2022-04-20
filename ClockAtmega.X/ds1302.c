@@ -5,13 +5,13 @@ void RTC_SendByte(uint8_t byte){
     for (uint8_t i = 0; i < 8; i++){
         if ((byte & 0x01) == 0x00)
 		{
-			PORTC &= ~(1 << RTC_DAT);
+			PORTD &= ~(1 << RTC_DAT);
 		}
-		else PORTC |= (1 << RTC_DAT);
+		else PORTD |= (1 << RTC_DAT);
 		byte = byte >> 1;
-		PORTB |= (1 << RTC_CLK);
+		PORTD |= (1 << RTC_CLK);
 		//asm("nop");
-		PORTB &= ~(1 << RTC_CLK);
+		PORTD &= ~(1 << RTC_CLK);
     }
 }
 
@@ -20,12 +20,12 @@ uint8_t RTC_ReadByte(){
     uint8_t result = 0;    
     for (uint8_t i = 0; i < 8; i ++)
 	{
-		PORTC |= (1 << RTC_CLK);                           //????? ?? ????? SCK	
+		PORTD |= (1 << RTC_CLK);                           //????? ?? ????? SCK	
         result = result << 1;
-		if ((PINC & (1 << RTC_DAT)) != 0x00){                 //??????? ????? ??? ? ??????? ????¤?
+		if ((PIND & (1 << RTC_DAT)) != 0x00){                 //??????? ????? ??? ? ??????? ????¤?
             result = result | 0x01;                                //??????? ????????? ? ????? ????? MISO ???
         }       
-		PORTC &= ~(1 << RTC_CLK);
+		PORTD &= ~(1 << RTC_CLK);
 		//asm("nop");
 	}
 	return result;    
@@ -33,12 +33,12 @@ uint8_t RTC_ReadByte(){
 
 uint8_t RTC_ReadReg(uint8_t adresse){
     uint8_t dataReg = 0;
-    PORTC |= (1 << RTC_CE);
+    PORTD |= (1 << RTC_CE);
     RTC_SendByte(adresse);
-    DDRC &= ~(1 << RTC_DAT);
+    DDRD &= ~(1 << RTC_DAT);
     dataReg = RTC_ReadByte();
-    DDRC |= (1 << RTC_DAT);
-    PORTC &= ~(1 << RTC_CE);
+    DDRD |= (1 << RTC_DAT);
+    PORTD &= ~(1 << RTC_CE);
     return dataReg;
 }
 

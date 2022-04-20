@@ -6,18 +6,18 @@
 #define clockInput       PB1
 #define dataInput        PB2
 #define dataEnable1      PB3
-#define dataEnable2      PB4
+#define dataEnable2      PC1
 
-#define RTC_CLK       PC0  //A0
-#define RTC_DAT        PC1  //A1
-#define RTC_CE         PC2  //A2
+#define RTC_CLK          PD2  //D2
+#define RTC_DAT          PD3  //D3
+#define RTC_CE           PD4  //D4
 
 
 
-//PB0 - ??????
-//PD5 - ??????
-//PD6 - ??????
-//PD7 - ??????
+//PB0 - button
+//PD5 - button
+//PD6 - button
+//PD7 - button
 
 #include <avr/io.h>
 #include "button.h"

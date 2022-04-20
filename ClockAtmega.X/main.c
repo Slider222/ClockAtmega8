@@ -1,10 +1,5 @@
 #include "funct.h"
 
-//#define EVERY_MS(x) \
-//  static uint32_t tmr;\
-//  uint8_t flag = ticks_ms() - tmr >= (x);\
-//  if (flag) tmr += (x);\
-//  if (flag)
 
 
 volatile uint64_t ticks = 0;
