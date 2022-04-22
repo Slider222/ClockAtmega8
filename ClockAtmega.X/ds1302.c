@@ -1,6 +1,6 @@
 #include "funct.h"
 
-uint8_t bytes[8];
+uint8_t bytes[8] = {0,0,0,0,0,0,0,0};
 
 void RTC_SendByte(uint8_t byte){
     DDRD |= (1 << RTC_DAT);
@@ -62,6 +62,33 @@ void RTC_SetMin(uint8_t mins){
     PORTD &= ~(1 << RTC_CE);    
     
 }
+
+
+void RTC_SetDay(uint8_t days){
+    PORTD |= (1 << RTC_CE);
+    RTC_SendByte(0x86);
+    RTC_SendByte(days);
+    PORTD &= ~(1 << RTC_CE);    
+    
+}
+
+void RTC_SetMounth(uint8_t mounth){
+    PORTD |= (1 << RTC_CE);
+    RTC_SendByte(0x88);
+    RTC_SendByte(mounth);
+    PORTD &= ~(1 << RTC_CE);    
+    
+}
+
+void RTC_SetYear(uint8_t years){
+    PORTD |= (1 << RTC_CE);
+    RTC_SendByte(0x8c);
+    RTC_SendByte(years);
+    PORTD &= ~(1 << RTC_CE);    
+    
+}
+
+
 
 void RTC_Unlock(){
     PORTD |= (1 << RTC_CE);

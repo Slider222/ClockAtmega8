@@ -1,7 +1,7 @@
 #include "funct.h"
 
 
-extern uint8_t bytes[8];
+extern uint8_t bytes[];
 
 
 volatile uint64_t ticks = 0;
@@ -18,10 +18,10 @@ int main(void) {
     timerInit();
     analogInit();
     startConversion();
-    uartInit(MYUBRR);    
-    uint8_t hours = 12, mins = 00, secs = 00;
+    uartInit(MYUBRR);   
+    
     sei();
-    uint32_t prevtime1 = 0, prevtime2 = 0, prevtime3 = 0, prevtime4 = 0, prevtime6 = 0, prevtime7 = 0, prevtime8 = 0;
+    uint32_t prevtime1 = 0, prevtime2 = 0, prevtime3 = 0, prevtime4 = 0, prevtime6 = 0, prevtime7 = 0, prevtime8 = 0, prevtime9 = 0;
     uint8_t buttonTrigName = 0, buttonLongName = 0;
     uint8_t screenTemp = 0;
     uint8_t displeyOff = 0;
@@ -29,80 +29,125 @@ int main(void) {
     uint32_t averageVal = analogTemp;
     uint32_t valState = 0;
     
-    uint8_t DS1302_sec ;
+    uint8_t DS1302_sec = 0;
     uint8_t DS1302_min = 0;
     uint8_t DS1302_hour = 0;
+    
+    uint8_t DS1302_day = 0;
+    uint8_t DS1302_mounth = 0;
+    uint8_t DS1302_weekDay = 0;
+    uint8_t DS1302_year = 0;
     
     RTC_Unlock();    
     
     while (1) {       
     curentTime = ticks_ms();
     buttonTrigName = trig_button(); 
-    buttonLongName = longTupButton(); 
+    buttonLongName = longTupButton();
+    ////////////////////////////////////////////////////////////////////set data
     
-    if (buttonLongName == ONE){
+      if (buttonLongName == ONE){
        if (ticks_ms() - prevtime2 >= LONGINC){
-          DS1302_hour++;
+          if(screenTemp == 0){
+            DS1302_hour++;
+            writeDataRTC = 1;
+          } else if (screenTemp == 1){
+            DS1302_day++;
+            writeDataRTC = 2;
+          }          
           prevtime8 = prevtime6 = prevtime2 = ticks_ms();
-        }
-       writeDataRTC = 1;
+        }       
     }
     
     if (buttonTrigName == ONE){
-       prevtime8 = prevtime6 = ticks_ms(); 
-       DS1302_hour++;
-       writeDataRTC = 1;
+       prevtime8 = prevtime6 = ticks_ms();
+       if(screenTemp == 0){
+         DS1302_hour++;
+         writeDataRTC = 1;
+       } else if (screenTemp == 1){
+         DS1302_day++;
+         writeDataRTC = 2;
+       }       
+       
     }
 
     if (buttonLongName == TWO){
        if (ticks_ms() - prevtime4 >= LONGINC){
-          DS1302_min++;
+          if(screenTemp == 0){
+             DS1302_min++;
+             writeDataRTC = 1;
+          } else if (screenTemp == 1){
+             DS1302_mounth++;
+             writeDataRTC = 2;
+          }          
           prevtime8 = prevtime6 = prevtime4 = ticks_ms();
         }                
-       writeDataRTC = 1;
+       
     }
     
     if (buttonTrigName == TWO){
        prevtime8 = prevtime6 = ticks_ms();
-       DS1302_min++;
-       writeDataRTC = 1;
-    }
+       if(screenTemp == 0){
+          DS1302_min++;
+          writeDataRTC = 1;
+       } else if (screenTemp == 1){
+          DS1302_mounth++;
+          writeDataRTC = 2;
+       }       
+       
+    }  
+    
+    
+    if (buttonLongName == THREE){
+       if (ticks_ms() - prevtime9 >= LONGINC){
+          if(screenTemp == 1){
+             DS1302_year++;
+             writeDataRTC = 2;
+          } 
+          prevtime8 = prevtime6 = prevtime9 = ticks_ms();
+        }
+    }    
 
     if (buttonTrigName == THREE){
-       displeyOff ^= 1;       
+       prevtime8 = prevtime6 = ticks_ms(); 
+       if(screenTemp == 0){
+         displeyOff ^= 1;   
+       } else if (screenTemp == 1){
+         DS1302_year++;
+         writeDataRTC = 2;
+       }       
     }        
     
 
-    
-    if ((ticks_ms() - prevtime1 >= 500) & (writeDataRTC == 0)){
-        RTC_ReadClock();    
-        DS1302_sec = hexToBin(bytes[0]);
-        DS1302_min = hexToBin(bytes[1]);
-        DS1302_hour = hexToBin(bytes[2]);
+    ////////////////////////////////////////////////////////////////READ time from RTC module
+    if ((ticks_ms() - prevtime1 >= 500)){
+        RTC_ReadClock();
+        if (writeDataRTC == 0){
+            DS1302_min = hexToBin(bytes[1]);
+            DS1302_hour = hexToBin(bytes[2]);
+            DS1302_day = hexToBin(bytes[3]);
+            DS1302_mounth = hexToBin(bytes[4]);
+            DS1302_weekDay = hexToBin(bytes[5]);
+            DS1302_year = hexToBin(bytes[6]);
+        }         
+        DS1302_sec = hexToBin(bytes[0]);        
         prevtime1 = ticks_ms();        	
     }        
         
-    if (secs == 60){
-           secs = 0;
-           mins = mins + 1;
-       }
-       if (mins == 60){
-           mins = 0;
-           hours = hours + 1;
-       }
-       if (hours == 24){
-           hours = 0;
-       }     
+    
+       
       
           
-    
+      ///////////////////////////////////////////////////////////////switch screen
       if (ticks_ms() - prevtime3 >= 30){
         if (displeyOff == 0){
             if (screenTemp == 0){                             
               sendClock(DS1302_hour, DS1302_min, DS1302_sec);
-          } else {              
+          } else if (screenTemp == 1) {              
+              sendClock(DS1302_day, DS1302_mounth, DS1302_year);
+          } else if (screenTemp == 2){
               sendTemp(averageVal);
-          }         
+          }        
         } else {
             offDispley();
         }          
@@ -111,15 +156,28 @@ int main(void) {
     }                  
     
     if (ticks_ms() - prevtime6 >= 5000){
-        screenTemp ^= 1;               
+        screenTemp++;
+        if (screenTemp == 3){
+            screenTemp = 0;
+        }
         uartTransmit32(127500);        
         prevtime6 = ticks_ms();
     }
     
     
-    //write clock into RTC
+    /////////////////////////////////////////////////////////////write clock into RTC
     
     if (writeDataRTC == 1){
+        if (DS1302_min == 60){
+           DS1302_min = 0;
+           DS1302_hour = DS1302_hour + 1;
+       }
+        
+       if (DS1302_hour == 24){
+           DS1302_hour = 0;
+       }    
+       
+        
         if (ticks_ms() - prevtime8 >= 10000){            
             RTC_Unlock();
             RTC_SetHour(binToHex(DS1302_hour));
@@ -127,6 +185,28 @@ int main(void) {
             writeDataRTC = 0;
             prevtime8 = ticks_ms(); 
         }
+        
+    } else if (writeDataRTC == 2){
+        if (DS1302_day >= 32){
+           DS1302_day = 1;           
+       }
+       
+       if (DS1302_mounth >= 13){
+           DS1302_mounth = 1;           
+       }
+        
+       if (DS1302_year >= 100){
+           DS1302_year = 00;           
+       }
+       if (ticks_ms() - prevtime8 >= 10000){
+          RTC_Unlock(); 
+          RTC_SetDay(binToHex(DS1302_day));
+          RTC_SetMounth(binToHex(DS1302_mounth));
+          RTC_SetYear(binToHex(DS1302_year));
+          prevtime8 = ticks_ms(); 
+       } 
+        
+        
     }
     
     

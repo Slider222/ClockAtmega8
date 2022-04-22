@@ -7,7 +7,7 @@ void port_init()
 {	
 	DDRB |= (1 << PORTB0);    
     DDRD |= (1 << PORTD5) | (1 << RTC_CLK) | (1 << RTC_DAT) | (1 << RTC_CE);
-    DDRC |= (1 << PORTC0) | (1 << PORTC1);
+    //DDRC |= (1 << PORTC0) | (1 << PORTC1);
 	
 	
 	DDRB |= (1 << clockInput) | (1 << dataInput) | (1 << dataEnable1) | (1 << dataEnable2);
