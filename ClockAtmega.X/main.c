@@ -2,11 +2,18 @@
 
 
 extern uint8_t bytes[];
-
+extern uint16_t note4[];
+extern uint16_t beat4[];
+extern uint16_t note[];
+extern uint16_t beat[];
 
 volatile uint64_t ticks = 0;
 volatile uint32_t curentTime = 0;
 uint32_t analogTemp = 0;
+uint8_t counter = 0;
+uint8_t buf_lev_ch1 = 0;
+uint8_t lev_ch1 = 0;
+
 
 
 
@@ -22,10 +29,12 @@ int main(void) {
     
     sei();
     uint32_t prevtime1 = 0, prevtime2 = 0, prevtime3 = 0, prevtime4 = 0, prevtime6 = 0, prevtime7 = 0, prevtime8 = 0, prevtime9 = 0;
+    uint32_t prevtime10 = 0, prevtime11 = 0;
     uint8_t buttonTrigName = 0, buttonLongName = 0;
     uint8_t screenTemp = 0;
     uint8_t displeyOff = 0;
     uint8_t writeDataRTC = 0;
+    uint8_t writeDataEEPROM = 0;
     uint32_t averageVal = analogTemp;
     uint32_t valState = 0;
     
@@ -38,14 +47,23 @@ int main(void) {
     uint8_t DS1302_weekDay = 0;
     uint8_t DS1302_year = 0;
     
-    RTC_Unlock();    
+    
+    uint8_t alarmHour = eeprom_read_byte((uint8_t*)0);
+    uint8_t alarmMin = eeprom_read_byte((uint8_t*)1);
+    uint8_t musicPlay = 0;
+    if (alarmHour > 24){
+        alarmHour = 0;
+    } 
+    if (alarmMin > 60){
+        alarmMin = 0;
+    }     
     
     while (1) {       
     curentTime = ticks_ms();
     buttonTrigName = trig_button(); 
     buttonLongName = longTupButton();
     ////////////////////////////////////////////////////////////////////set data
-    
+      
       if (buttonLongName == ONE){
        if (ticks_ms() - prevtime2 >= LONGINC){
           if(screenTemp == 0){
@@ -54,6 +72,9 @@ int main(void) {
           } else if (screenTemp == 1){
             DS1302_day++;
             writeDataRTC = 2;
+          } else if (screenTemp == 3){
+              alarmHour++;
+              writeDataEEPROM = 1;
           }          
           prevtime8 = prevtime6 = prevtime2 = ticks_ms();
         }       
@@ -67,7 +88,10 @@ int main(void) {
        } else if (screenTemp == 1){
          DS1302_day++;
          writeDataRTC = 2;
-       }       
+       } else if (screenTemp == 3){
+              alarmHour++;
+              writeDataEEPROM = 1;
+          }                
        
     }
 
@@ -79,7 +103,10 @@ int main(void) {
           } else if (screenTemp == 1){
              DS1302_mounth++;
              writeDataRTC = 2;
-          }          
+          } else if (screenTemp == 3){
+              alarmMin++;
+              writeDataEEPROM = 2;
+          }                         
           prevtime8 = prevtime6 = prevtime4 = ticks_ms();
         }                
        
@@ -93,7 +120,10 @@ int main(void) {
        } else if (screenTemp == 1){
           DS1302_mounth++;
           writeDataRTC = 2;
-       }       
+       } else if (screenTemp == 3){
+              alarmMin++;
+              writeDataEEPROM = 2;
+        }                                
        
     }  
     
@@ -116,7 +146,19 @@ int main(void) {
          DS1302_year++;
          writeDataRTC = 2;
        }       
-    }        
+    }
+    
+    if (buttonLongName == FOUR){
+        
+        screenTemp = 3;
+        prevtime6 = ticks_ms();
+    }
+    
+    if (buttonTrigName == FOUR){
+        if (musicPlay == 1){
+            musicPlay = 0;
+        }        
+    }
     
 
     ////////////////////////////////////////////////////////////////READ time from RTC module
@@ -146,7 +188,10 @@ int main(void) {
           } else if (screenTemp == 1) {              
               sendClock(DS1302_day, DS1302_mounth, DS1302_year);
           } else if (screenTemp == 2){
-              sendTemp(averageVal);
+              sendTemp(averageVal);              
+          } 
+            else if (screenTemp == 3){
+              sendClock(alarmHour, alarmMin, 0x00);              
           }        
         } else {
             offDispley();
@@ -157,7 +202,7 @@ int main(void) {
     
     if (ticks_ms() - prevtime6 >= 5000){
         screenTemp++;
-        if (screenTemp == 3){
+        if (screenTemp >= 3){
             screenTemp = 0;
         }
         uartTransmit32(127500);        
@@ -203,6 +248,7 @@ int main(void) {
           RTC_SetDay(binToHex(DS1302_day));
           RTC_SetMounth(binToHex(DS1302_mounth));
           RTC_SetYear(binToHex(DS1302_year));
+          writeDataRTC = 0;
           prevtime8 = ticks_ms(); 
        } 
         
@@ -217,6 +263,42 @@ int main(void) {
         prevtime7 = ticks_ms();
     }
     
+    if (ticks_ms() - prevtime10 >= 1000){
+       if ((DS1302_hour == alarmHour) & (DS1302_min == alarmMin)){
+           musicPlay = 1;
+        } else if ((DS1302_hour == alarmHour) & ((DS1302_min - alarmMin) >= 1)){
+           musicPlay = 0; 
+        } 
+    }
+    
+    if (musicPlay == 1){
+       playMuisic(note, beat, 39);       
+    } else {
+       stopMuisic(); 
+    }
+    
+    if (writeDataEEPROM == 1){
+        if (alarmHour >= 24){
+            alarmHour = 0;
+        }
+        if (ticks_ms() - prevtime11 >= 10000){
+           eeprom_write_byte((uint8_t*)0, alarmHour);
+           writeDataEEPROM = 0;
+           prevtime11 = ticks_ms(); 
+        }
+    } else if (writeDataEEPROM == 2) {
+        if (alarmMin >= 60){
+            alarmMin = 0;
+        }
+        if (ticks_ms() - prevtime11 >= 10000){
+           eeprom_write_byte((uint8_t*)1, alarmMin);
+           writeDataEEPROM = 0;
+           prevtime11 = ticks_ms(); 
+        }
+    }
+    
+    
+    
    
     }         //while
 }            //main
@@ -226,6 +308,18 @@ ISR(TIMER0_OVF_vect){
 	TCNT0 = 7;
 	ticks++;
     
+}
+
+ISR(TIMER2_OVF_vect){	
+  if (++counter==0){
+    buf_lev_ch1 = lev_ch1;          //PWM delay    
+    PORTB |=(1 << PWM_OUT); 
+  }
+    
+  if (counter == buf_lev_ch1){
+      PORTB&=~(1 << PWM_OUT);
+  } 
+  
 }
 
 ISR(ADC_vect){    

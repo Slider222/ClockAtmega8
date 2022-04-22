@@ -8,7 +8,7 @@
 #define dataInput        PB2
 #define dataEnable1      PB3
 #define dataEnable2      PB4
-
+#define PWM_OUT          PB5
 
 #define RTC_CLK          PD2  //D2
 #define RTC_DAT          PD3  //D3
@@ -33,6 +33,7 @@
 #include "ds1302.h"
 #include <avr/pgmspace.h>
 #include <util/delay.h>
+#include <avr/eeprom.h>
 
 
 
