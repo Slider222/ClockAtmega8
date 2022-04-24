@@ -29,7 +29,7 @@ int main(void) {
     
     sei();
     uint32_t prevtime1 = 0, prevtime2 = 0, prevtime3 = 0, prevtime4 = 0, prevtime6 = 0, prevtime7 = 0, prevtime8 = 0, prevtime9 = 0;
-    uint32_t prevtime10 = 0, prevtime11 = 0;
+    uint32_t prevtime10 = 0, prevtime11 = 0, prevtime12 = 0;
     uint8_t buttonTrigName = 0, buttonLongName = 0;
     uint8_t screenTemp = 0;
     uint8_t displeyOff = 0;
@@ -47,7 +47,7 @@ int main(void) {
     uint8_t DS1302_weekDay = 0;
     uint8_t DS1302_year = 0;
     
-    
+    ////////////////////////////////////////////////////read alarm from eeprom
     uint8_t alarmHour = eeprom_read_byte((uint8_t*)0);
     uint8_t alarmMin = eeprom_read_byte((uint8_t*)1);
     uint8_t musicPlay = 0;
@@ -262,13 +262,15 @@ int main(void) {
         averageVal = (averageVal * 10 + valState)/11;      
         prevtime7 = ticks_ms();
     }
-    
+    /////////////////////////////////////////delay before pusk
     if (ticks_ms() - prevtime10 >= 1000){
-       if ((DS1302_hour == alarmHour) & (DS1302_min == alarmMin)){
+       if ((DS1302_hour == alarmHour) & (DS1302_min == alarmMin) & (DS1302_sec == 1)){
            musicPlay = 1;
-        } else if ((DS1302_hour == alarmHour) & ((DS1302_min - alarmMin) >= 1)){
-           musicPlay = 0; 
         } 
+    }
+    
+    if (ticks_ms() - prevtime12 >= 120000){
+        musicPlay = 0;
     }
     
     if (musicPlay == 1){
@@ -303,23 +305,17 @@ int main(void) {
     }         //while
 }            //main
 
-
+//16000000/256*256 = 244 Hz
 ISR(TIMER0_OVF_vect){
 	TCNT0 = 7;
 	ticks++;
     
 }
 
-ISR(TIMER2_OVF_vect){	
-  if (++counter==0){
-    buf_lev_ch1 = lev_ch1;          //PWM delay    
-    PORTB |=(1 << PWM_OUT); 
-  }
-    
-  if (counter == buf_lev_ch1){
-      PORTB&=~(1 << PWM_OUT);
-  } 
-  
+
+//////////////////////////////////////     62500/ocr2 = 262 * 2 Hz   
+ISR(TIMER2_COMP_vect){
+   PORTB ^= (1 << PWM_OUT);
 }
 
 ISR(ADC_vect){    

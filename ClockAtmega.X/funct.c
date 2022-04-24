@@ -26,8 +26,8 @@ void timerInit(){
     
     
     TCNT2 = 0;                                           
-	TIMSK |= (1 << TOIE2);                               
-	//TCCR2 |= (1 << CS20);                
+	TIMSK |= (1 << OCIE2);                               
+	TCCR2 |= (1 << WGM21);                
 	                              
 
 }

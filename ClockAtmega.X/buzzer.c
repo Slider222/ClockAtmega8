@@ -17,8 +17,8 @@ void playMuisic(const uint16_t* notes, const uint16_t* beats, uint8_t size){
 				durations = durations / 3;
 			}
 			else {
-				TCCR2 |=(1 << CS20);
-				lev_ch1 = 31256/pgm_read_word(&notes[countNote]); //28800  1600000/(256*2)/notes
+				TCCR2 |=(1 << CS21)|(1 << CS22);
+				OCR2 = 31256/pgm_read_word(&notes[countNote]); //28800  1600000/(256*2)/notes
 				DDRB |= (1 << PWM_OUT);
 				durations =  pgm_read_word(&(beats[countNote]))*1; // 3*/;
 				countMassive = 1;
@@ -36,7 +36,7 @@ void playMuisic(const uint16_t* notes, const uint16_t* beats, uint8_t size){
 
 void stopMuisic(){
     DDRB &= ~(1 << PWM_OUT);
-    TCCR2 &=~(1 << CS20);
+    TCCR2 &=~((1 << CS21)|(1 << CS22));
 }
 
 const uint16_t note4[] PROGMEM =		      {
