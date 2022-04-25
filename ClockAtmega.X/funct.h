@@ -34,6 +34,7 @@
 #include <avr/pgmspace.h>
 #include <util/delay.h>
 #include <avr/eeprom.h>
+#include <string.h>
 
 
 
