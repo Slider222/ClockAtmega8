@@ -7,6 +7,8 @@ extern uint16_t beat4[];
 extern uint16_t note[];
 extern uint16_t beat[];
 
+extern uint8_t displeyBuffer[6];
+
 volatile uint64_t ticks = 0;
 volatile uint32_t curentTime = 0;
 uint32_t analogTemp = 0;
@@ -301,7 +303,7 @@ int main(void) {
     
     
     
-   
+    SPI_SendByte(displeyBuffer);
     }         //while
 }            //main
 
