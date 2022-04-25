@@ -7,7 +7,9 @@ extern uint16_t beat4[];
 extern uint16_t note[];
 extern uint16_t beat[];
 
+extern const uint8_t array[];
 extern uint8_t displeyBuffer[6];
+uint8_t displeyTemp[6];
 
 volatile uint64_t ticks = 0;
 volatile uint32_t curentTime = 0;
@@ -58,7 +60,9 @@ int main(void) {
     } 
     if (alarmMin > 60){
         alarmMin = 0;
-    }     
+    } 
+
+        
     
     while (1) {       
     curentTime = ticks_ms();
@@ -302,8 +306,8 @@ int main(void) {
     }
     
     
+    update();
     
-    SPI_SendByte(displeyBuffer);
     }         //while
 }            //main
 

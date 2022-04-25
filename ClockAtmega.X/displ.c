@@ -5,57 +5,77 @@ uint8_t displeyBuffer[6];
 
 
 void clearDispl(){
-    memset(displeyBuffer, 0, 6);
+	for (uint8_t i = 0; i < 6; i++){
+		displeyBuffer[i] = 0x00;
+	}
 }
 
 
-void SPI_SendByte(uint8_t* byte){	   	  
-	   PORTB |= (1 << dataInput);
-	   PORTB |= (1 << clockInput);
-	   PORTB &= ~(1 << clockInput);
-       
-       PORTB |= (1 << dataEnable2);
-       PORTB &= ~(1 << dataEnable1);
-       
-       for (uint8_t i = 0; i < 3;){
-           for (uint8_t j = 0; j < 8; j++){
-               if ((byte[i] & 0x01) == 0x00){
-                   PORTB &= ~(1 << dataInput);
-               } else {
-                   PORTB |= (1 << dataInput);
-               }
-               byte[i] = byte[i] >> 1;
-               PORTB |= (1 << clockInput);
-		       PORTB &= ~(1 << clockInput);
-           }
-       }
-       for (uint8_t i = 0; i < 12; i++){
-          PORTB |= (1 << clockInput);
-		  PORTB &= ~(1 << clockInput); 
-       }
-       PORTB &= ~(1 << dataEnable2);
-       PORTB |= (1 << dataEnable1);
-       for (uint8_t i = 3; i < 6;){
-           for (uint8_t j = 0; j < 8; j++){
-               if ((byte[i] & 0x01) == 0x00){
-                   PORTB &= ~(1 << dataInput);
-               } else {
-                   PORTB |= (1 << dataInput);
-               }
-               byte[i] = byte[i] >> 1;
-               PORTB |= (1 << clockInput);
-		       PORTB &= ~(1 << clockInput);
-           }
-       }
-       for (uint8_t i = 0; i < 12; i++){
-          PORTB |= (1 << clockInput);
-		  PORTB &= ~(1 << clockInput); 
-       }	   
-
-	   PORTB |= (1 << dataEnable1);
-	   PORTB |= (1 << dataEnable2);	
+void sendLeft(){
+	PORTB &= ~(1 << dataEnable1);
+	PORTB |= (1 << dataInput);
+	PORTB |= (1 << clockInput);
+	PORTB &= ~(1 << clockInput);
+	
+	for (uint8_t i = 0; i < 3; i++){
+		uint8_t byte = displeyBuffer[i];
+		for (uint8_t j = 0; j < 8; j++){
+			if ((byte & 0x01) == 0x00){
+				PORTB &= ~(1 << dataInput);
+				} else {
+				PORTB |= (1 << dataInput);
+			}
+			byte = byte >> 1;
+			PORTB |= (1 << clockInput);
+			PORTB &= ~(1 << clockInput);
+		}
+	}
+	for (uint8_t i = 0; i < 12; i++){
+		PORTB &= ~(1 << dataInput);
+		PORTB |= (1 << clockInput);
+		PORTB &= ~(1 << clockInput);
+	}
+	
+	PORTB |= ~(1 << dataEnable2);
+	PORTB |= (1 << dataEnable1);
+	
 }
 
+
+void sendRight(){
+	PORTB &= ~(1 << dataEnable2);
+	PORTB |= (1 << dataInput);
+	PORTB |= (1 << clockInput);
+	PORTB &= ~(1 << clockInput);
+	
+	for (uint8_t i = 3; i < 6; i++){
+		uint8_t byte = displeyBuffer[i];
+		for (uint8_t j = 0; j < 8; j++){
+			if ((byte & 0x01) == 0x00){
+				PORTB &= ~(1 << dataInput);
+				} else {
+				PORTB |= (1 << dataInput);
+			}
+			byte = byte >> 1;
+			PORTB |= (1 << clockInput);
+			PORTB &= ~(1 << clockInput);
+		}
+	}
+	for (uint8_t i = 0; i < 12; i++){
+		PORTB &= ~(1 << dataInput);
+		PORTB |= (1 << clockInput);
+		PORTB &= ~(1 << clockInput);
+	}
+	
+	PORTB |= ~(1 << dataEnable2);
+	PORTB |= (1 << dataEnable1);
+	
+}
+
+void update(){	
+	sendLeft(displeyBuffer);
+	sendRight(displeyBuffer);
+}
 
 
 void sendClock(uint8_t hour, uint8_t min, uint8_t sec){
@@ -115,9 +135,9 @@ void sendTemp(uint32_t temp){
 
 void offDispley(){
     PORTB &= ~(1 << dataEnable2);
-    SPI_SendByte(0);
+    
     PORTB &= ~(1 << dataEnable1);
-    SPI_SendByte(0);
+    
 }
 
 

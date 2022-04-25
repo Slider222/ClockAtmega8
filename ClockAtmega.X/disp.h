@@ -22,7 +22,9 @@
 
 
 
-void SPI_SendByte(uint8_t* byte);
+void sendLeft();
+void sendRight();
+void update();
 void sendClock(uint8_t hour, uint8_t min, uint8_t sec);
 void sendTemp(uint32_t temp);
 void offDispley();
