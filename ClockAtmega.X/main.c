@@ -17,11 +17,15 @@ uint32_t analogTemp = 0;
 uint8_t counter = 0;
 uint8_t buf_lev_ch1 = 0;
 uint8_t lev_ch1 = 0;
-
-
-
-
 uint32_t musicTime = 0;
+
+extern uint8_t _processIsBusy;
+
+extern uint8_t _hour;
+extern uint8_t _min;
+extern uint8_t _sec;
+
+extern uint8_t _effectMode;
 
 
 int main(void) {
@@ -190,19 +194,22 @@ int main(void) {
       if (ticks_ms() - prevtime3 >= 30){
         if (displeyOff == 0){
             if (screenTemp == 0){                             
-              sendClock(DS1302_hour, DS1302_min, DS1302_sec);
+              setClock(DS1302_hour, DS1302_min, DS1302_sec);
+              setClockToBuffer();
           } else if (screenTemp == 1) {              
-              sendClock(DS1302_day, DS1302_mounth, DS1302_year);
+              setClock(DS1302_day, DS1302_mounth, DS1302_year);
+              setClockToBuffer();
           } else if (screenTemp == 2){
               sendTemp(averageVal);              
           } 
             else if (screenTemp == 3){
-              sendClock(alarmHour, alarmMin, 0x00);              
+              setClock(alarmHour, alarmMin, 0x00);
+              setClockToBuffer();              
           }        
         } else {
             offDispley();
         }          
-          
+          update();
           prevtime3 = ticks_ms();
     }                  
     
@@ -305,8 +312,8 @@ int main(void) {
         }
     }
     
+    doEffectWithOverlay(_effectMode);
     
-    update();
     
     }         //while
 }            //main

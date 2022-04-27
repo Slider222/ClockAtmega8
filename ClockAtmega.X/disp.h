@@ -22,12 +22,18 @@
 
 
 
+void setPort();
 void sendLeft();
 void sendRight();
 void update();
-void sendClock(uint8_t hour, uint8_t min, uint8_t sec);
-void sendTemp(uint32_t temp);
-void offDispley();
+void setClockToBuffer();
+void clearDispl();
 
+void processEffect(uint8_t aMode);
+void sendClockWithEffect();
+void doEffectWithOverlay(uint8_t aMode);
+void setClock(uint8_t hour, uint8_t min, uint8_t sec);
+uint8_t getPixel(uint8_t x, uint8_t* buffer);
+void drawPixel(uint8_t x);
 #endif	/* XC_HEADER_TEMPLATE_H */
 
