@@ -44,7 +44,7 @@
 
 void port_init();
 void timerInit();
-uint64_t ticks_ms();
+uint32_t ticks_ms();
 uint8_t hexToBin(uint8_t data);
 uint8_t binToHex(uint8_t data);
 

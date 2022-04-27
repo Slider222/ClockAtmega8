@@ -1,8 +1,7 @@
 #include "funct.h"
                           //0    1      2     3     4     5     6     7     8     9    _    _min    _C
 const uint8_t array[] = {0x3f, 0x06, 0x5b, 0x4f, 0x66, 0x6d, 0x7d, 0x07, 0x7f, 0x6f, 0x00, 0x40, 0x39};	
-uint8_t displeyBuffer[6];
- uint8_t displeyBuffer[6];
+uint8_t displeyBuffer[6]; 
  
  uint8_t _delayEffect = 100;
  uint8_t _effectMode = 1;
@@ -187,13 +186,13 @@ void sendClockWithEffect(){
 	 
 		
 		
-	if (ticks() - prevTime1 >= _delayEffect){		
+	if (_ticks() - prevTime1 >= _delayEffect){		
 		if (j++ >= 48){
 			j = 0;
 			i = 0;			
 			_processIsBusy = 0;
 		}
-		prevTime1 = ticks();
+		prevTime1 = _ticks();
 	}
 }
 

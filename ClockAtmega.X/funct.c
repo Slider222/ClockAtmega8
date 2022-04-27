@@ -1,6 +1,6 @@
 #include "funct.h"
 
-extern volatile uint64_t ticks;
+volatile uint32_t _ticks;
 
 
 void port_init()
@@ -12,6 +12,7 @@ void port_init()
 	
 	DDRB |= (1 << clockInput) | (1 << dataInput) | (1 << dataEnable1) | (1 << dataEnable2) | (1 << PWM_OUT);
 	PORTB |= (1 << dataEnable1) | (1 << dataEnable2);
+    
     
     
     
@@ -32,12 +33,12 @@ void timerInit(){
 
 }
 
-uint64_t ticks_ms(){
-    uint64_t ticksReturn = 0;
+uint32_t ticks_ms(){
+    //uint64_t ticksReturn = 0;
 	ATOMIC_BLOCK(ATOMIC_FORCEON){  	
-        ticksReturn = ticks;        		
-	}
-    return ticksReturn;	
+        //ticksReturn = ticks;   
+        return _ticks;
+	}    	
 }
 
 

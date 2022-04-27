@@ -7,12 +7,11 @@ extern uint16_t beat4[];
 extern uint16_t note[];
 extern uint16_t beat[];
 
-extern const uint8_t array[];
-extern uint8_t displeyBuffer[6];
-uint8_t displeyTemp[6];
 
-volatile uint64_t ticks = 0;
-volatile uint32_t curentTime = 0;
+
+
+
+extern volatile uint32_t _ticks = 0;
 uint32_t analogTemp = 0;
 uint8_t counter = 0;
 uint8_t buf_lev_ch1 = 0;
@@ -68,8 +67,7 @@ int main(void) {
 
         
     
-    while (1) {       
-    curentTime = ticks_ms();
+    while (1) { 
     buttonTrigName = trig_button(); 
     buttonLongName = longTupButton();
     ////////////////////////////////////////////////////////////////////set data
@@ -321,7 +319,7 @@ int main(void) {
 //16000000/256*256 = 244 Hz
 ISR(TIMER0_OVF_vect){
 	TCNT0 = 7;
-	ticks++;
+	_ticks++;
     
 }
 

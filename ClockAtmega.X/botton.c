@@ -1,6 +1,6 @@
 #include "funct.h"
 
-extern volatile uint32_t curentTime;
+
 volatile uint32_t prevTime0 = 0;
 
 
@@ -16,7 +16,7 @@ unsigned char getKey(){
 		PORTD |= (1 << PIND5);
 		PORTB &= ~(1 << PINB0); 
 	 }	
-	if (curentTime - prevTime0 >= 30){		   
+	if (ticks_ms() - prevTime0 >= 30){		   
 	   if (~PIND & (1 << PIND6)){
 		  if (PINB & (1 << PINB0)){
 			 key = THREE; 
@@ -36,7 +36,7 @@ unsigned char getKey(){
 		 if (count == 4){
 			 count = 0;
 		 }
-		 prevTime0 = curentTime;		 
+		 prevTime0 = ticks_ms();		 
 	   } 
     return key;
 }
