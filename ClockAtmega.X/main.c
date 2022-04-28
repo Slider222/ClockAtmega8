@@ -11,7 +11,7 @@ extern uint16_t beat[];
 
 
 
-extern volatile uint32_t _ticks = 0;
+extern volatile uint32_t _ticks;
 uint32_t analogTemp = 0;
 uint8_t counter = 0;
 uint8_t buf_lev_ch1 = 0;
@@ -58,6 +58,7 @@ int main(void) {
     uint8_t alarmHour = eeprom_read_byte((uint8_t*)0);
     uint8_t alarmMin = eeprom_read_byte((uint8_t*)1);
     uint8_t musicPlay = 0;
+    
     if (alarmHour > 24){
         alarmHour = 0;
     } 
@@ -72,8 +73,8 @@ int main(void) {
     buttonLongName = longTupButton();
     ////////////////////////////////////////////////////////////////////set data
       
-      if (buttonLongName == ONE){
-       if (ticks_ms() - prevtime2 >= LONGINC){
+    if (buttonLongName == ONE){
+        if (ticks_ms() - prevtime2 >= LONGINC){
           if(screenTemp == 0){
             DS1302_hour++;
             writeDataRTC = 1;
@@ -206,8 +207,7 @@ int main(void) {
           }        
         } else {
             offDispley();
-        }          
-          update();
+        } 
           prevtime3 = ticks_ms();
     }                  
     
@@ -310,7 +310,7 @@ int main(void) {
         }
     }
     
-    doEffectWithOverlay(_effectMode);
+    customRoutine(_effectMode);
     
     
     }         //while

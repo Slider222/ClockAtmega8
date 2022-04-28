@@ -13,6 +13,8 @@ uint8_t displeyBuffer[6];
  uint8_t _hour;
  uint8_t _min;
  uint8_t _sec;
+ 
+ uint32_t timeUpdate = 0;
 
 
 void clearDispl(){
@@ -186,13 +188,13 @@ void sendClockWithEffect(){
 	 
 		
 		
-	if (_ticks() - prevTime1 >= _delayEffect){		
+	if (ticks_ms() - prevTime1 >= _delayEffect){		
 		if (j++ >= 48){
 			j = 0;
 			i = 0;			
 			_processIsBusy = 0;
 		}
-		prevTime1 = _ticks();
+		prevTime1 = ticks_ms();
 	}
 }
 
@@ -205,8 +207,18 @@ void processEffect(uint8_t aMode){
 
 
 void doEffectWithOverlay(uint8_t aMode){	
-	 processEffect(aMode);
+	 processEffect(aMode);	 
+	 if (ticks_ms() - timeUpdate >= 30){
+		 update();
+		 timeUpdate = ticks_ms();
+	 }
 }
+
+
+void customRoutine(uint8_t aMode){
+	 doEffectWithOverlay(aMode);
+}
+
 
 void offDispley(){
     PORTB &= ~(1 << dataEnable2);
@@ -214,6 +226,9 @@ void offDispley(){
     PORTB &= ~(1 << dataEnable1);
     
 }
+
+
+
 
 
 
